@@ -9,6 +9,20 @@ if [ "" == "$PKG_OK" ]; then
 fi
 }
 
+function isRoot () {
+	if [ "$EUID" -ne 0 ]; then
+		return 1
+	fi
+}
+function initalRun () {
+	if ! isRoot; then
+		echo "Sorry, you need to run this as root"
+		exit 1
+	fi
+}
+
+initalRun
+
 echo "Update apt"
 echo "--------------------------------------------"
 PKG_OK=$(dpkg-query -W --showformat='${Status}\n' apt|grep "install ok installed")
