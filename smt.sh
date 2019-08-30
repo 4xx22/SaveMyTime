@@ -1,4 +1,4 @@
-#bin/bash
+#!/bin/bash
 
 function checkPackage () {
 PKG_OK=$(dpkg-query -W --showformat='${Status}\n' $package|grep "install ok installed")
